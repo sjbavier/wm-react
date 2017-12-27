@@ -1,0 +1,307 @@
+body{
+  background-color: #111;
+  padding-top: 0;
+  overflow: hidden;
+}
+html, body, .perspective {
+width: 100%;
+height: 100%;
+}
+a:hover, a:focus {
+  text-decoration: none;
+}
+.container-fluid {
+  position: relative;
+  padding-left: 0;
+  padding-right: 0;
+}
+#container2 {
+  background-image: url('/img/slides/Glass-Lion.jpg');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  min-height: 100%;
+position: relative;
+outline: 1px solid rgba(0,0,0,0);
+z-index: 10;
+-webkit-transform: translateZ(0) translateX(0) rotateY(0deg); /* reset transforms (Chrome bug) */
+transform: translateZ(0) translateX(0) rotateY(0deg);
+}
+#showMenu {
+  position: absolute;
+  top: 47%;
+  left: 0.25em;
+  }
+#showGallery {
+  position: absolute;
+  top: 47%;
+  right: 0.25em;
+  color: rgba(255, 255, 255, 0.85);;
+  transition: transform 0.2s, color 0.1s;
+  border: 3px ridge rgba(255, 255, 255, 0.85);
+  font-size: 1.5em;
+  padding: 0.25em 0.65em;
+  font-weight: 700;
+      z-index: 101;
+}
+#gallery {
+  height: 101%;
+  width: 33%;
+  position: absolute;
+  top: 100%;
+  right: 4em;
+  border-left: 3px ridge rgba(194, 194, 194, 0.77);
+  border-right: 3px ridge rgba(194, 194, 194, 0.77);
+  background: rgba(255,255,255, 0.053);
+  transition: top 0.3s ease-in;
+  overflow:hidden;
+  z-index: 100;
+  background: rgba(158, 158, 158, 0.45);
+}
+.scrollbox{
+  width: 100%;
+  height:100%;
+  overflow-y: auto;
+}
+.blur {
+-webkit-filter: blur(20px);
+-moz-filter: blur(20px);
+-ms-filter: blur(20px);
+filter: blur(20px);
+transition: blur .2s ease-in-out;
+}
+.scrollbox::-webkit-scrollbar {
+  display: none;
+}
+#gallery img {
+  width: 90%;
+  margin: 5%;
+}
+#gallery img:first-of-type {
+margin-top: ;
+}
+#gallery.viewGallery {
+  top: 0%;
+}
+.glyphicons {
+  text-shadow: 1px 1px 0px rgba(60, 60, 60, 0.8);
+}
+.glyphicons::before {
+  color: rgba(255, 255, 255, 0.85);
+  transition: transform 0.2s, color 0.1s;
+  border: 3px ridge rgba(255, 255, 255, 0.85);
+  padding: 0.25em 0.25em 0.25em 0.25em;
+}
+.glyphicons.animate::before{
+  transform: rotate(90deg);
+  color: rgba(255,255,255, 0.9);
+  border: 2px solid rgba(255,255,255, 0.9);
+}
+#container2::after {
+content: '';
+position: absolute;
+top: 0;
+left: 0;
+width: 100%;
+height: 0px;
+opacity: 0;
+background: rgba(0,0,0,0.6);
+/* the transition delay of the height needs to be synced with the container transition time */
+-webkit-transition: opacity 0.4s, height 0s 0.4s;
+transition: opacity 0.4s, height 0s 0.4s;
+}
+.em-height{
+
+  height: 4em;
+}
+.show_lines{
+
+  margin: 0 auto;
+}
+.perspective{
+
+  width: 100%;
+  height: 100%;
+}
+.wrapper {
+position: relative;
+}
+/* Clearfix hack by Nicolas Gallagher: http://nicolasgallagher.com/micro-clearfix-hack/ */
+.clearfix:before,
+.clearfix:after {
+display: table;
+content: " ";
+}
+
+.clearfix:after {
+clear: both;
+}
+
+/* Modal view */
+.perspective.modalview {
+position: fixed;
+-webkit-perspective: 1500px;
+perspective: 1500px;
+}
+
+.modalview #container2 {
+position: absolute;
+overflow: hidden;
+width: 100%;
+height: 100%;
+-webkit-backface-visibility: hidden;
+backface-visibility: hidden;
+}
+.modalview.animate #container2 {
+  cursor: pointer;
+}
+
+.modalview .wrapper {
+-webkit-transform: translateZ(-1px); /* solves a rendering bug in Chrome on Windows */
+}
+
+.animate #container2::after {
+opacity: 1;
+height: 101%;
+-webkit-transition: opacity 0.3s;
+transition: opacity 0.3s;
+}
+
+/* Outer Nav */
+.outer-nav {
+position: absolute;
+height: auto;
+font-size: 2em;
+}
+
+
+
+.outer-nav.horizontal {
+left: 50%;
+width: 75%;
+max-width: 1000px;
+text-align: center;
+-webkit-transform: translateX(-50%);
+transform: translateX(-50%);
+}
+
+.outer-nav a {
+display: inline-block;
+white-space: nowrap;
+font-weight: 300;
+margin: 0 0 30px 0;
+color: #fff;
+-webkit-transition: color 0.3s;
+transition: color 0.3s;
+-webkit-transform-style: preserve-3d;
+transform-style: preserve-3d;
+}
+
+.outer-nav a:hover {
+color: #ffdccd;
+}
+.outer-nav.horizontal a {
+margin: 15px 20px;
+}
+
+.outer-nav a::before {
+display: inline-block;
+font-family: 'typicons';
+speak: none;
+font-style: normal;
+font-weight: normal;
+font-variant: normal;
+text-transform: none;
+line-height: 1;
+margin-right: 10px;
+-webkit-font-smoothing: antialiased;
+-moz-osx-font-smoothing: grayscale;
+-webkit-backface-visibility: hidden;
+backface-visibility: hidden;
+}
+
+/* Effect Lay Down */
+.effect-laydown {
+/*bkground */
+}
+
+.effect-laydown #container2 {
+-webkit-transition: -webkit-transform 0.4s, background-size 0.4s;
+transition: transform 0.4s, background-size 0.4s;
+-webkit-transform-origin: 50% 150%;
+transform-origin: 50% 150%;
+  transition-delay: 0.2s;
+}
+
+.effect-laydown.animate #container2 {
+-webkit-transform: translateZ(-900px) rotateX(50deg);
+transform: translateZ(-900px) rotateX(50deg);
+}
+
+.no-csstransforms3d .effect-laydown.animate #container2 {
+top: 75%;
+}
+
+.effect-laydown .outer-nav a {
+opacity: 0;
+-webkit-transform: translateY(-200px) translateZ(-1000px);
+transform: translateY(-200px) translateZ(-1000px);
+-webkit-transition: -webkit-transform 0.4s, opacity 0.4s;
+transition: transform 0.4s, opacity 0.4s;
+}
+
+.effect-laydown.animate .outer-nav a {
+opacity: 1;
+-webkit-transform: translateY(0) translateZ(0);
+transform: translateY(0) translateZ(0);
+}
+
+.effect-laydown.animate .outer-nav a:nth-child(7){
+-webkit-transition-delay: 0.0s;
+transition-delay: 0.0s;
+}
+
+.effect-laydown.animate .outer-nav a:nth-child(6) {
+-webkit-transition-delay: 0.04s;
+transition-delay: 0.04s;
+}
+
+.effect-laydown.animate .outer-nav a:nth-child(5) {
+-webkit-transition-delay: 0.08s;
+transition-delay: 0.08s;
+}
+
+.effect-laydown.animate .outer-nav a:nth-child(4) {
+-webkit-transition-delay: 0.12s;
+transition-delay: 0.12s;
+}
+
+.effect-laydown.animate .outer-nav a:nth-child(3) {
+-webkit-transition-delay: 0.16s;
+transition-delay: 0.16s;
+}
+
+.effect-laydown.animate .outer-nav a:nth-child(2) {
+-webkit-transition-delay: 0.2s;
+transition-delay: 0.2s;
+}
+
+.effect-laydown.animate .outer-nav a:first-child {
+-webkit-transition-delay: 0.24s;
+transition-delay: 0.24s;
+}
+@media (min-width: 767px) and (max-width: 1199px) {
+#container2 {
+  background-size: 110%;
+}
+}
+@media (max-width: 767px) {
+#container2 {
+  background-size: 120%;
+}
+}
+@media (max-width: 666px) {
+#container2 {
+  background-size: 150%;
+}
+}
