@@ -10,7 +10,10 @@ import registerServiceWorker from './registerServiceWorker';
 
 let root = document.getElementById('root')
 
-ReactDOM.render(<App />, root );
+// extend class 'perspective' 
+root.classList.add("perspective")
+
+ReactDOM.render(<App initClass="perspective" />, root );
 
 
 registerServiceWorker();

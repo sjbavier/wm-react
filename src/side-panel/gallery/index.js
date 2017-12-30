@@ -5,7 +5,7 @@ class Gallery extends Component {
     render(){
         return(
             <div id="gallery">
-                <div class="scrollbox">
+                <div className="scrollbox">
                     <img src="" />
                 </div>
             </div>

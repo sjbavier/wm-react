@@ -16,7 +16,7 @@ a:hover, a:focus {
   padding-right: 0;
 }
 #container2 {
-  background-image: url('/img/slides/Glass-Lion.jpg');
+  background-image: url('./img/slides/Glass-Lion.jpg');
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
