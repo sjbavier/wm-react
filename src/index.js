@@ -17,6 +17,9 @@ import './index.css';
 
 // Import all components
 import App from './App';
+import Graphics from './components/widgets/graphics'
+import Photos from './components/widgets/photos'
+import Reference from './components/widgets/reference'
 
 // Import combined reducer and saga
 import IndexReducer from './index-reducer'
@@ -39,7 +42,7 @@ window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ : compose;
 // create store and the combined reducers from IndexReducer
 const store = createStore(
     IndexReducer,
-    composeSetup( applyMiddleware(sagaMiddleware) )
+    composeSetup( applyMiddleware( sagaMiddleware ) )
 )
 
 // initiate Index Sage
@@ -53,9 +56,9 @@ root.classList.add("perspective")
 ReactDOM.render(
     <Provider store={store}>
         <Router history={history}>
-            <Route path="/" component={App}>
-                {/* <Route path="/photos" component={}/>
-                <Route path="/reference" component={}/> */}
+            <Route path="/" component={ App }>
+                <Route path="/photos" component={ Photos } />
+                <Route path="/reference" component={ Reference } /> 
             </Route>
         </Router>
     </Provider>, 
