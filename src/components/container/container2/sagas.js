@@ -12,7 +12,7 @@ function* navigationOn( navON ){
 
 function* navigationOff( navOFF ){
     console.log("made it to navigationOff ")
-    setTimeout( yield put( { type: NAVIGATION_ANIMATION_OFF } ) , 50000 )
+    yield put( { type: NAVIGATION_ANIMATION_OFF } )
 }
 
 function* navigationWatcher () {
