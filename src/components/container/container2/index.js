@@ -27,6 +27,9 @@ class Container2 extends Component {
             animating: PropTypes.bool,
             open: PropTypes.bool,
         }),
+        photos: PropTypes.shape({
+            backgroundImg: PropTypes.string,
+        }),
     }
 
      // value will be the event object
@@ -51,10 +54,15 @@ class Container2 extends Component {
                 animating,
                 open,
             },
+            photos: {
+                backgroundImg,
+            },
         } = this.props
 
         return(
-            <div id="container2" onClick={ this.click }>
+            <div id="container2" onClick={ this.click }
+            style={ {backgroundImage: `url(${ this.props.photos.backgroundImg })`} }
+            >
                 <ToggleNav />
                 <div className="wrapper">
                     <div className="row">
@@ -73,6 +81,7 @@ class Container2 extends Component {
 const mapStateToProps = state => ({
     nav: state.nav,
     sidePanel: state.sidePanel,
+    photos: state.photos,
 })
 
 // make Redux 'Container2' and action 'navigationCloseRequest' available in this.props within component

@@ -1,25 +1,14 @@
-import { SIDEPANEL_ON, SIDEPANEL_OFF } from './constants'
+import { SELECT_IMAGE } from './constants'
 
 const initialState = {
-    galleryClassList: [],
-    blurClassList: [],
-    open: false,
+    backgroundImg: "",
 }
 
 const reducer = function sidePanelReducer ( state = initialState, action ) {
     switch ( action.type ) {
-        case SIDEPANEL_ON:
+        case SELECT_IMAGE:
             return {
-                galleryClassList:['viewGallery'],
-                blurClassList:['blur'],
-                open: true,
-            }
-        
-        case SIDEPANEL_OFF:
-            return {
-                galleryClassList:[],
-                blurClassList:[],
-                open: false,
+                backgroundImg: action.backgroundImg,
             }
         default:
             return state

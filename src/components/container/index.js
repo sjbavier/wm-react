@@ -34,7 +34,7 @@ class Container extends Component {
         } = this.props
 
         return(
-            <div id="container" className={ this.props.nav.containerClassList.concat( this.props.sidePanel ).join(' ') }>
+            <div id="container" className={ this.props.nav.containerClassList.concat( this.props.sidePanel ).join(' ') } >
                 <Container2 />
                 <Nav />
             </div>
@@ -45,7 +45,7 @@ class Container extends Component {
 // map state to props with only information we are utilizing
 const mapStateToProps = state => ({
     sidePanel: state.sidePanel.blurClassList,
-    nav: state.nav
+    nav: state.nav,
 })
 
 const connected = connect( mapStateToProps )( Container )

@@ -10,7 +10,7 @@ import { createStore, applyMiddleware, compose } from 'redux'
 import { Provider } from 'react-redux'
 import  createSagaMiddleware from 'redux-saga'
 // import { Router, Route } from 'react-router'
-import { BrowserRouter, Router, Route } from 'react-router-dom'
+import { BrowserRouter, Router, Route, Switch, Redirect } from 'react-router-dom'
 import { createHashHistory } from 'history'
 
 // Import CSS
@@ -55,7 +55,10 @@ ReactDOM.render(
     <Provider store={ store }>
         <BrowserRouter>
             <Router history={ history }>
-                <App /> 
+                <Switch>
+                    <Route path="/" component={ App } />
+                    <Redirect to="/" />
+                </Switch>
             </Router>
         </BrowserRouter>
     </Provider>, 

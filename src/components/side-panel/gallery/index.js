@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { Route, Switch, Redirect } from 'react-router-dom'
+import { Route } from 'react-router-dom'
 import Photos from '../../photos/photos'
+import Graphics from '../../photos/graphics'
 
 class Gallery extends Component {
 
@@ -18,11 +19,8 @@ class Gallery extends Component {
         } = this.props
         return(
             <div id="gallery" className={ this.props.sidePanel.galleryClassList.join('') }>
-                    <Switch>
-                        <Route path="/" exact component={ Photos } />
                         <Route path="/photos" component={ Photos } />
-                        <Redirect to="/" />
-                    </Switch>
+                        <Route path="/graphics" component={ Graphics } />
             </div>
         )
     }

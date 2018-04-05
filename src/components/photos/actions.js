@@ -1,13 +1,8 @@
-import { SIDEPANEL_ON, SIDEPANEL_OFF } from './constants'
+import { SELECT_IMAGE } from './constants'
 
-export const sidePanelOnRequest = function sidePanelOnRequest( ) {
+export const selectImage = function selectImage( backgroundImg ) {
     return {
-        type: SIDEPANEL_ON
-    }
-}
-
-export const sidePanelOffRequest = function sidePanelOffRequest( ) {
-    return {
-        type: SIDEPANEL_OFF
+        type: SELECT_IMAGE,
+        backgroundImg: backgroundImg
     }
 }
