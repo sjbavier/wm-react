@@ -292,16 +292,16 @@ transition-delay: 0.24s;
 }
 @media (min-width: 767px) and (max-width: 1199px) {
 #container2 {
-  background-size: 110%;
+  background-size: contain;
 }
 }
 @media (max-width: 767px) {
 #container2 {
-  background-size: 120%;
+  background-size: contain;
 }
 }
 @media (max-width: 666px) {
 #container2 {
-  background-size: 150%;
+  background-size: contain;
 }
 }
