@@ -47,7 +47,7 @@ transform: translateZ(0) translateX(0) rotateY(0deg);
 #gallery {
   height: 101%;
   width: 33%;
-  position: absolute;
+  position: fixed;
   top: 100%;
   right: 4em;
   border-left: 3px ridge rgba(194, 194, 194, 0.77);
