@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "bookmarks-to-json-categorization": "^1.1.11",
     "bootstrap": "^3.3.7",
     "fs": "^0.0.1-security",
     "list-react-files": "^0.2.0",

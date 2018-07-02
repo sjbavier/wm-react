@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
+import { Route } from 'react-router-dom'
 
 // import components
-import ToggleNav from './toggle-nav'
+import Bookmarks from '../../bookmarks/Bookmarks'
 
 // import actions
 import { navigationCloseRequest } from './actions'
@@ -63,14 +64,8 @@ class Container2 extends Component {
             <div id="container2" onClick={ this.click }
             style={ {backgroundImage: `url(${ this.props.photos.backgroundImg })`} }
             >
-                <ToggleNav />
                 <div className="wrapper">
-                    <div className="row">
-                        <div className="col-sm-6">
-                        </div>
-                        <div className="col-sm-6">
-                        </div>
-                     </div>
+                    <Route path="/" exact component={ Bookmarks } />
                 </div>
             </div>
         )

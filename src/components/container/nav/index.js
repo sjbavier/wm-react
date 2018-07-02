@@ -28,6 +28,10 @@ class Nav extends Component {
         this.props.navigationCloseRequest()
         this.props.sidePanelOnRequest()
     }
+    
+    clack = ( e ) => {
+        this.props.navigationCloseRequest()
+    }
 
     render(){
 
@@ -35,7 +39,7 @@ class Nav extends Component {
 
         return (
             <nav className="outer-nav top horizontal">
-               <Link to="/">Home</Link>
+               <Link to="/" onClick={ this.clack }>Home</Link>
                <Link to="/photos" onClick={ this.click }>photos</Link>
                <Link to="/graphics" onClick={ this.click }>graphics</Link>
             </nav>

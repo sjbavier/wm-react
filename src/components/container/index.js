@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 
 // import components
 import Container2 from './container2'
+import ToggleNav from './container2/toggle-nav'
 import Nav from './nav'
 
 class Container extends Component {
@@ -35,6 +36,8 @@ class Container extends Component {
 
         return(
             <div id="container" className={ this.props.nav.containerClassList.concat( this.props.sidePanel ).join(' ') } >
+                { !toggled && ( <ToggleNav /> )}
+                
                 <Container2 />
                 <Nav />
             </div>
