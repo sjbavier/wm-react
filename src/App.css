@@ -347,6 +347,24 @@ a:focus {
   justify-content: center;
 }
 
+/* ReactCSSTransitionGroup */
+.bookmarkAnimate-enter {
+  opacity: 0.01;
+  width: 0px;
+}
+.bookmarkAnimate-enter.bookmarkAnimate-enter-active {
+  opacity: 1;
+  transition: 500ms;
+}
+.bookmarkAnimate-leave {
+  opacity: 1;
+}
+.bookmarkAnimate-leave.bookmarkAnimate-active {
+  opacity: 1;
+  transition: 3ms;
+}
+/* ReactCSSTransitionGroup */
+
 .flex-item.bookmark {
   width: 25%;
   padding: 1.4em;
@@ -399,8 +417,8 @@ a:focus {
   background: rgba(255, 255, 255, 0.1);
 }
 .catRes {
-  position: absolute;
-  right: 20px;
+  position: fixed;
+  right: calc(40px + 10%);
   top: calc(50% - 48px);
   padding: .4em 1.4em;
   z-index: 5;
@@ -442,6 +460,11 @@ a:focus {
   }
   #gallery.viewGallery {
     right: 20%;
+  }
+  .catRes {
+    position: fixed;
+    right: 20px;
+    top: auto;
   }
 }
 

@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { CSSTransitionGroup } from 'react-transition-group'
 import bookmarksJson from './bookmarksJson.json'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
@@ -38,16 +39,18 @@ class Bookmarks extends Component {
     updateBookmarks() {
         let currBookmarks = this.props.bookmarks.bookmarksData
         let newBookmarks = []
-
-        for( let i = 0; i < currBookmarks.length; i++){
-            if( currBookmarks[i].category.indexOf( this.props.bookmarks.cat ) !== -1 ){
-                newBookmarks.push(currBookmarks[i])
-            }
+        if( this.props.bookmarks.cat === ''){
+            this.setState({ renderMarks: currBookmarks })
+        } else {
+            for( let i = 0; i < currBookmarks.length; i++){
+                if( currBookmarks[i].category.indexOf( this.props.bookmarks.cat ) !== -1 ){
+                    newBookmarks.push(currBookmarks[i])
+                }
         }
         console.log( newBookmarks )
         this.setState({renderMarks: newBookmarks })
+        }
         this.props.sidePanelOffRequest()
-        
     }
 
     render() {
@@ -69,8 +72,10 @@ class Bookmarks extends Component {
             )
         })
         return (
-            <div className="flex">
-                { bookmarksR }
+            <div>
+                 <CSSTransitionGroup className="flex" transitionName="bookmarkAnimate" transitionEnterTimeout={500} transitionLeaveTimeout={3}>
+                    { bookmarksR }
+                </CSSTransitionGroup>
             </div>
 
         )

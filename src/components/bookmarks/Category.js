@@ -20,6 +20,9 @@ class Category extends Component {
             cats: PropTypes.array,
             catMaxHits: PropTypes.number,
         }),
+        sidePanel: PropTypes.shape({
+            open: PropTypes.bool,
+        }),
     }
 
     componentDidUpdate(prevProps, prevState) {
@@ -63,8 +66,7 @@ class Category extends Component {
     }
 
     catReset(e) {
-        e.stopPropagation()
-        e.preventDefault()
+
         this.props.resSpecCat()
     }
 
@@ -72,7 +74,12 @@ class Category extends Component {
     render() {
         const {
             bookmarks: {
-                catMaxHits
+                catMaxHits,
+                bookmarksLoaded,
+                catSel,
+            },
+            sidePanel: {
+                open,
             }
         } = this.props
         const cats = this.props.bookmarks.cats.map(( cat, i ) => {
@@ -80,7 +87,7 @@ class Category extends Component {
             let bar = { width: `${pctOfMax}%` } 
             let catString = cat[0]   
             return (
-                <div className="flex-item" key={ i } onClick={ () => this.setCategory( cat[0] )} >
+                <div className="flex-item" key={ i } onClick={ () => this.setCategory( catString )} >
                     <span style={ bar } className="bar"></span>
                     <div className="z2">
                         { cat[0] }
@@ -88,16 +95,10 @@ class Category extends Component {
                 </div>
             )
         })
-        const {
-            bookmarks: {
-                bookmarksLoaded,
-                catSel,
-            },
-        } = this.props
         return (
             <div className="flex">
-                { !!catSel && (
-                    <div className="catRes" onClick={ this.catReset }>reset
+                { !!catSel && !!open && (
+                    <div className="catRes" onClick={ () => this.catReset() }>reset
                     </div>
                 )}
                 { !!bookmarksLoaded && (
@@ -110,7 +111,8 @@ class Category extends Component {
 }
 
 const mapStateToProps = state => ( {
-    bookmarks: state.bookmarks
+    bookmarks: state.bookmarks,
+    sidePanel: state.sidePanel,
 } )
 
 const connected = connect( mapStateToProps, { setSpecCat, setCats, setCatMaxHits, resSpecCat })( Category )

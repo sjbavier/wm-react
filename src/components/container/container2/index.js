@@ -62,7 +62,7 @@ class Container2 extends Component {
 
         return(
             <div id="container2" onClick={ this.click }
-            style={ {backgroundImage: `url(${ this.props.photos.backgroundImg })`} }
+            style={ {backgroundImage: `url(${ backgroundImg })`} }
             >
                 <div className="wrapper">
                     <Route path="/" exact component={ Bookmarks } />
