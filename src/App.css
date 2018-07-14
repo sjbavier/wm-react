@@ -3,6 +3,7 @@ body {
   padding-top: 0;
   overflow: hidden;
   color: rgba(255, 255, 255, 0.5607843137254902);
+  font-family: "Maven Pro", arial, sans-serif;
 }
 
 html,
@@ -82,7 +83,7 @@ a:focus {
   border-right: 3px ridge rgba(194, 194, 194, 0.77);
   background: rgba(255, 255, 255, 0.053);
   transition: right 0.3s ease-out;
-  overflow: hidden;
+  overflow-y: scroll;
   z-index: 100;
   background: rgba(158, 158, 158, 0.45);
 }
@@ -365,11 +366,53 @@ a:focus {
 .flex-item a {
   color: rgba(214, 201, 255, 0.82);
   text-shadow: 0 0 0px rgba(255, 255, 255, 0.69), 0 0 1px rgba(255,255,255, .2);
+  transition: color .1s ease-out;
 }
-
+.flex-item a:hover {
+  color: rgba(255, 255, 255, 1);
+}
 .flex-item.bookmark .cat {
   font-size: 12px;
 }
+.viewGallery .flex-item {
+  position: relative;
+  width: 50%;
+  padding:.6em .6em;
+  cursor: pointer;
+  transition:background .1s ease-out;
+}
+.viewGallery .flex-item span.bar{
+  height: 100%;
+  position: absolute;
+  display: block;
+  overflow: hidden;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  background: rgba(83, 49, 10, 0.9);
+}
+.viewGallery .flex-item .z2{
+  z-index: 2;
+  position: relative;
+}
+.viewGallery .flex-item:hover{
+  background: rgba(255, 255, 255, 0.1);
+}
+.catRes {
+  position: absolute;
+  right: 20px;
+  top: calc(50% - 48px);
+  padding: .4em 1.4em;
+  z-index: 5;
+  transform: rotate(-90deg);
+  transform-origin: right;
+  border: 1px solid rgba(255,255,255,.3);
+  cursor:pointer;
+}
+.catRes:hover {
+  background: rgba(255,255,255, .3);
+}
+
 
 /* END bookmarks */
 @media (min-width: 2000px) {

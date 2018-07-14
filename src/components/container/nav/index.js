@@ -39,7 +39,7 @@ class Nav extends Component {
 
         return (
             <nav className="outer-nav top horizontal">
-               <Link to="/" onClick={ this.clack }>Home</Link>
+               <Link to="/" onClick={ this.clack }>home</Link>
                <Link to="/photos" onClick={ this.click }>photos</Link>
                <Link to="/graphics" onClick={ this.click }>graphics</Link>
             </nav>
