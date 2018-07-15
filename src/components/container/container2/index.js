@@ -36,7 +36,6 @@ class Container2 extends Component {
      // value will be the event object
      click = ( clickEvent ) => {   
         clickEvent.stopPropagation()
-        clickEvent.preventDefault()
         if( this.props.nav.toggled ){
             this.props.navigationCloseRequest( clickEvent )
         }

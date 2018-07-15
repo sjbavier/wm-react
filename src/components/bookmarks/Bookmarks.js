@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { CSSTransitionGroup } from 'react-transition-group'
 import bookmarksJson from './bookmarksJson.json'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
@@ -72,10 +71,8 @@ class Bookmarks extends Component {
             )
         })
         return (
-            <div>
-                 <CSSTransitionGroup className="flex" transitionName="bookmarkAnimate" transitionEnterTimeout={500} transitionLeaveTimeout={3}>
-                    { bookmarksR }
-                </CSSTransitionGroup>
+            <div className="flex">
+                { bookmarksR }
             </div>
 
         )
