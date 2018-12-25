@@ -20,12 +20,17 @@ class Bookmarks extends Component {
     constructor(props){
         super(props)
         this.state = {
+		// instantiate array that will contain bokmarks rendered
             renderMarks: []
         }
     }
 
     componentDidMount() {
+	    try {
         this.props.loadBookmarks( bookmarksJson )
+		} catch (e) {
+			console.log(e)
+		}
         this.setState({ renderMarks: bookmarksJson })
     }
 
