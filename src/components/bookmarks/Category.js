@@ -25,6 +25,7 @@ class Category extends Component {
         }),
     }
 
+
     componentDidUpdate(prevProps, prevState) {
 
         if( this.props.bookmarks.bookmarksData !== prevProps.bookmarks.bookmarksData && !!this.props.bookmarks.bookmarksLoaded) {
@@ -63,6 +64,10 @@ class Category extends Component {
 
     setCategory( cat ){
         this.props.setSpecCat( cat )
+    }
+
+    unsetCategory( cat ){
+        
     }
 
     catReset(e) {
