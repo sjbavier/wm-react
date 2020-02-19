@@ -20,40 +20,50 @@ class Bookmarks extends Component {
     constructor(props){
         super(props)
         this.state = {
-		// instantiate array that will contain bokmarks rendered
+		// instantiate array that will contain bookmarks rendered
             renderMarks: []
         }
     }
 
     componentDidMount() {
+        // try to load the bookmarks data and catch errors
 	    try {
         this.props.loadBookmarks( bookmarksJson )
 		} catch (e) {
 			console.log(e)
-		}
+        }
+        // note this is data directly from json file and not the redux store
+        // splitting this data allows for the rendering to contain only a subset of the original
         this.setState({ renderMarks: bookmarksJson })
     }
 
     componentDidUpdate(prevProps) {
+        // in component lifecyle check for updates to props
         if ( this.props.bookmarks.cat !== prevProps.bookmarks.cat ) {
             this.updateBookmarks()
         }
     }
 
     updateBookmarks() {
+        // load all the bookmarks into currBookmarks
         let currBookmarks = this.props.bookmarks.bookmarksData
         let newBookmarks = []
+        // if the category was reset, set the redux store bookmarksData value
         if( this.props.bookmarks.cat === ''){
             this.setState({ renderMarks: currBookmarks })
         } else {
             for( let i = 0; i < currBookmarks.length; i++){
+                // this is a linear sort using indexOf's value
                 if( currBookmarks[i].category.indexOf( this.props.bookmarks.cat ) !== -1 ){
+                    // building new array of matched bookmarks
                     newBookmarks.push(currBookmarks[i])
                 }
         }
         console.log( newBookmarks )
+        // updating state with new bookmarks array
         this.setState({renderMarks: newBookmarks })
         }
+        // modify the UI side panel by retracting it
         this.props.sidePanelOffRequest()
     }
 
