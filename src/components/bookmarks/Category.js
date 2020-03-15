@@ -53,6 +53,7 @@ class Category extends Component {
         sortable.sort(function(a, b) {
             return b[1] - a[1]
         })
+        
         this.props.setCatMaxHits( sortable[0][1] )
         // sorting comparison
         sortable.sort((a, b) => {
