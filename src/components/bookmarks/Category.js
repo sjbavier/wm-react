@@ -77,6 +77,9 @@ class Category extends Component {
         this.props.resSpecCat()
     }
 
+    filter( value, obj ){
+
+    }
 
     render() {
         const {
