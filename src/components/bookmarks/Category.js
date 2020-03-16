@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { setSpecCat, setCats, setCatMaxHits, resSpecCat } from './actions'
+import parseBookmarksJson from '../../lib/utilities/parseBookmarksJson'
 
 class Category extends Component {
 
@@ -34,28 +35,13 @@ class Category extends Component {
     }
 
     initCategories(){
-        // create array of all categories
-        let catArray = []
-        let sortable = []
-        for ( let i = 0; i < this.props.bookmarks.bookmarksData.length; i++) {
-            catArray = catArray.concat(this.props.bookmarks.bookmarksData[i].category)
-        }
-        // reduce array of categories into an object that contains each word as key and value of # of hits
-        let counts = catArray.reduce(( prev, curr ) => {
-            prev[curr] = (prev[curr] || 0) + 1
-            return prev
-        }, {})
+        let sortable= parseBookmarksJson( this.props.bookmarks.bookmarksData )
 
-        for (var keyword in counts) {
-            sortable.push([keyword, counts[keyword]])
-        }
-
-        sortable.sort(function(a, b) {
-            return b[1] - a[1]
-        })
-        
+        // we are setting the most frequent item so that others are compared relative to the most popular
+        // for CSS layout
         this.props.setCatMaxHits( sortable[0][1] )
-        // sorting comparison
+
+        // now sort the categories by alphabetical
         sortable.sort((a, b) => {
             if( a[0] < b[0]) return -1
             else if ( a[0] > b[0] ) return 1
