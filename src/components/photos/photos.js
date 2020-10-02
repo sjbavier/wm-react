@@ -28,7 +28,8 @@ class Photos extends Component {
         clickEvent.stopPropagation()
       clickEvent.preventDefault()
        this.props.selectImage( clickEvent.target.getAttribute('src') )
- }
+     localStorage.setItem("backgroundImg", clickEvent.target.getAttribute('src'))
+  }
 
 render(){
  const { selectImage } = this.props 

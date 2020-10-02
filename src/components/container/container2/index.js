@@ -59,9 +59,13 @@ class Container2 extends Component {
             },
         } = this.props
 
+        let localBackgroundImg = localStorage.getItem("backgroundImg")
+
+        let background = localBackgroundImg ? localBackgroundImg : backgroundImg
+
         return(
             <div id="container2" onClick={ this.click }
-            style={ {backgroundImage: `url(${ backgroundImg })`} }
+            style={ {backgroundImage: `url(${ background })`} }
             >
                 <div className="wrapper">
                     <Route path="/" exact component={ Bookmarks } />
