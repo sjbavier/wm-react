@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { setSpecCat, setCats, setCatMaxHits, resSpecCat } from './actions'
+import { sidePanelOffRequest } from '../side-panel/actions'
 
 class Category extends Component {
 
@@ -10,6 +11,7 @@ class Category extends Component {
         setSpecCat: PropTypes.func,
         setCats: PropTypes.func,
         resSpecCat: PropTypes.func,
+        sidePanelOffRequest: PropTypes.func,
         bookmarks: PropTypes.shape({
             bookmarksData: PropTypes.array,
             bookmarksLoaded: PropTypes.bool,
@@ -25,15 +27,29 @@ class Category extends Component {
         }),
     }
 
+    constructor( props ) {
+        super(props)
+        this.state = {
+                value: ''
+        }
+        this.searchKey = this.searchKey.bind(this)
+        this.submit = this.submit.bind(this)
+    }
 
     componentDidUpdate(prevProps, prevState) {
 
         if( this.props.bookmarks.bookmarksData !== prevProps.bookmarks.bookmarksData && !!this.props.bookmarks.bookmarksLoaded) {
             this.initCategories()
         }
+
+        // in component lifecyle check for updates to props and state
+        if ( this.props.bookmarks.cat !== prevProps.bookmarks.cat && this.state.value !== this.props.bookmarks.cat ) {
+            this.searchKey(this.props.bookmarks.cat)
+        }
+        
     }
 
-    initCategories(){
+    initCategories() {
         // create array of all categories
         let catArray = []
         let sortable = []
@@ -64,17 +80,26 @@ class Category extends Component {
         this.props.setCats( sortable )
     }
 
-    setCategory( cat ){
+    setCategory( cat ) {
         this.props.setSpecCat( cat )
+        // modify the UI side panel by retracting it
+        this.props.sidePanelOffRequest()
     }
 
-    unsetCategory( cat ){
-        
-    }
-
-    catReset(e) {
-
+    catReset( e ) {
         this.props.resSpecCat()
+    }
+
+    submit( e ){
+        e.preventDefault()
+        e.stopPropagation()
+        this.props.sidePanelOffRequest()
+    }
+
+    searchKey( e ) {
+        let value = typeof( e ) === "object" ? e.target.value : e 
+        this.setState({value: value})
+        this.props.setSpecCat( value )
     }
 
 
@@ -84,33 +109,56 @@ class Category extends Component {
                 catMaxHits,
                 bookmarksLoaded,
                 catSel,
+                cats,
             },
             sidePanel: {
                 open,
             }
         } = this.props
-        const cats = this.props.bookmarks.cats.map(( cat, i ) => {
+
+        var catFilter = cats.filter( (cat, index, origArray) => {
+            if ( this.props.bookmarks.cat === "" ) {
+                return true
+            } else {
+                return cat[0].indexOf( this.props.bookmarks.cat ) > -1
+            }
+        } )
+
+        var categories = catFilter.map(( cat, i ) => {
             let pctOfMax = ( ( cat[1] / catMaxHits ) * 100 )
             let bar = { width: `${pctOfMax}%` } 
-            let catString = cat[0]   
+            let catString = cat[0]
+            let spanStyle = {
+                float: 'right',
+            }
             return (
                 <div className="flex-item" key={ i } onClick={ () => this.setCategory( catString )} >
                     <span style={ bar } className="bar"></span>
                     <div className="z2">
                         { cat[0] }
+                        <span style={ spanStyle } >{ cat[1] }</span>
                     </div>
                 </div>
             )
         })
         return (
-            <div className="flex">
-                { !!catSel && !!open && (
+            <div>
+                <div className="flex search-form">
+                { !!bookmarksLoaded && !!open && (
+                    <form onSubmit={ this.submit }>
+                        <input type="text" autoFocus={ true } value={ this.state.value } onChange={ this.searchKey } placeholder="search"></input>
+                    </form> 
+                )}
+                { !!open && (
                     <div className="catRes" onClick={ () => this.catReset() }>reset
                     </div>
                 )}
+                </div>
+                <div className="flex categories pad-top">
                 { !!bookmarksLoaded && (
-                     cats             
+                     categories             
                 )}
+                </div>
             </div>
 
         )
@@ -122,6 +170,6 @@ const mapStateToProps = state => ( {
     sidePanel: state.sidePanel,
 } )
 
-const connected = connect( mapStateToProps, { setSpecCat, setCats, setCatMaxHits, resSpecCat })( Category )
+const connected = connect( mapStateToProps, { setSpecCat, setCats, setCatMaxHits, resSpecCat, sidePanelOffRequest })( Category )
 
 export default connected

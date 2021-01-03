@@ -37,11 +37,20 @@ class Bookmarks extends Component {
         this.setState({ renderMarks: bookmarksJson })
     }
 
-    componentDidUpdate(prevProps) {
+    componentDidUpdate( prevProps ) {
         // in component lifecyle check for updates to props
         if ( this.props.bookmarks.cat !== prevProps.bookmarks.cat ) {
             this.updateBookmarks()
         }
+    }
+
+    constRegexString( input ){
+        let inputArray = input.split(' ')
+        let regexString = ''
+        for( var i = 0; i < inputArray.length; i++ ){
+            i === ( inputArray.length - 1 ) ? regexString += inputArray[i] : regexString += inputArray[i] + "|"
+        }
+        return regexString
     }
 
     updateBookmarks() {
@@ -52,19 +61,24 @@ class Bookmarks extends Component {
         if( this.props.bookmarks.cat === ''){
             this.setState({ renderMarks: currBookmarks })
         } else {
+            let regexString = this.constRegexString( this.props.bookmarks.cat )
+            let regexMatch = new RegExp( "(" + regexString + ")" , "g" );
             for( let i = 0; i < currBookmarks.length; i++){
-                // this is a linear sort using indexOf's value
-                if( currBookmarks[i].category.indexOf( this.props.bookmarks.cat ) !== -1 ){
+                if( Array.isArray(currBookmarks[i].category) && currBookmarks[i].category.toString().match( regexMatch ) !== null ){
                     // building new array of matched bookmarks
+                    let regexMatching = currBookmarks[i].category.toString().match( regexMatch )
+                    currBookmarks[i].matching = regexMatching
                     newBookmarks.push(currBookmarks[i])
                 }
         }
-        console.log( newBookmarks )
+        newBookmarks.sort(function( a, b) {
+            return b.matching.length - a.matching.length
+        })
         // updating state with new bookmarks array
         this.setState({renderMarks: newBookmarks })
         }
         // modify the UI side panel by retracting it
-        this.props.sidePanelOffRequest()
+        // this.props.sidePanelOffRequest()
     }
 
     render() {
@@ -75,13 +89,13 @@ class Bookmarks extends Component {
             }
         } = this.props
 
-        const bookmarksR = this.state.renderMarks.map( ( bookmark, i ) => {            
+        const bookmarksR = this.state.renderMarks.map( ( bookmark, i ) => {           
             return (
                 <div className="flex-item bookmark" key={ i }>
                     <h3>
                         <a href={ bookmark.link } target="_blank" rel="noopener noreferrer">{ bookmark.title }</a>
                     </h3>
-                    <div className="cat">{ bookmark.category.join(', ') }</div>
+                    <div className="cat">{ Array.isArray(bookmark.category) && bookmark.category.join(', ') }</div>
                 </div> 
             )
         })

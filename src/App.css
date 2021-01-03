@@ -4,6 +4,7 @@ body {
   overflow: hidden;
   color: rgba(255, 255, 255, 0.5607843137254902);
   font-family: "Maven Pro", arial, sans-serif;
+  font-size: 1.4rem;
 }
 
 html,
@@ -33,7 +34,7 @@ a:focus {
 
 #container2 {
   background-image: url('./img/gallery/graphics/Glass-Lion.jpg');
-  background-size: contain;
+  background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
   min-height: 100%;
@@ -70,6 +71,7 @@ a:focus {
   z-index: 101;
   width: 42px;
   height: 42px;
+  box-shadow: 2px 2px 2px rgb(0 0 0 / 25%), -2px -2px 2px rgb(0 0 0 / 25%), -2px 2px 2px rgb(0 0 0 / 25%), 2px -2px rgb(0 0 0 / 25%);
 }
 
 #gallery {
@@ -82,7 +84,6 @@ a:focus {
   border-right: 3px ridge rgba(194, 194, 194, 0.77);
   background: rgba(255, 255, 255, 0.053);
   transition: right 0.3s ease-out;
-  overflow-y: scroll;
   z-index: 100;
   background: rgba(158, 158, 158, 0.45);
 }
@@ -118,6 +119,20 @@ a:focus {
   right: 10%;
 }
 
+input[type="text"] {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  color: #fff;
+  padding: .5em;
+  background: transparent;
+  outline: none;
+  font-size: 1.5rem;
+  border-radius: 10%;
+  border: 1.5px ridge rgb(255 255 255 / 41%);
+}
+.search-form input[type="text"] {
+  width: 27vw;
+}
 .glyphicons {
 
 }
@@ -346,6 +361,20 @@ a:focus {
   justify-content: center;
 }
 
+.flex.pad-top{
+      overflow-y: scroll;
+      height: calc(100vh - 11.5rem);
+      margin-top: 11.5rem;
+}
+.flex.categories {
+  align-content: flex-start;
+  justify-content: flex-start;
+}
+
+.flex.search-form form{
+  position: fixed;
+}
+
 /* ReactCSSTransitionGroup */
 .bookmarkAnimate-enter {
   opacity: 0.01;
@@ -365,7 +394,8 @@ a:focus {
 /* ReactCSSTransitionGroup */
 
 .flex-item.bookmark {
-  width: 25%;
+  width: 23%;
+  margin: 1%;
   padding: 1.4em;
   margin-bottom: .8em;
   border: 1px solid #48484805;
@@ -378,6 +408,8 @@ a:focus {
   font-size: 16px;
   margin: 0;
   line-height: 1.4em;
+  padding-bottom: 0.5em;
+  border-bottom: 1px solid rgb(221 221 221 / 21%);
   margin-bottom: 0.4em;
 }
 .flex-item a {
@@ -411,20 +443,21 @@ a:focus {
 .viewGallery .flex-item .z2{
   z-index: 2;
   position: relative;
+  overflow: hidden;
 }
-.viewGallery .flex-item:hover{
+.viewGallery .flex-item:hover, .viewGallery .flex-item:active {
   background: rgba(255, 255, 255, 0.1);
 }
 .catRes {
-  position: fixed;
-  right: calc(40px + 10%);
-  top: calc(50% - 48px);
-  padding: .4em 1.4em;
+  padding: .5rem 1.5rem;
   z-index: 5;
-  transform: rotate(-90deg);
-  transform-origin: right;
-  border: 1px solid rgba(255,255,255,.3);
-  cursor:pointer;
+  border: 1.5px ridge rgba(255,255,255,.3);
+  cursor: pointer;
+  border-radius: 1em;
+  text-align: center;
+  width: 27vw;
+  position: fixed;
+  top: 6.5rem;
 }
 .catRes:hover {
   background: rgba(255,255,255, .3);
@@ -434,37 +467,40 @@ a:focus {
 /* END bookmarks */
 @media (min-width: 2000px) {
   .flex-item.bookmark {
-    width: 15%;
+    width: 13%;
   }
 }
 @media (min-width: 767px) and (max-width: 1199px) {
   #container2 {
-    background-size: contain;
+    background-size: cover;
   }
   .flex-item.bookmark {
-    width: 50%;
+    width: 48%;
   }
 }
 
 @media (max-width: 767px) {
   #container2 {
-    background-size: contain;
+    background-size: cover;
   }
   .flex-item.bookmark {
+    margin: 1% 0;
     width: 100%;
   }
   #gallery {
     width: 45%;
     right: -46%;
   }
+  .search-form input[type="text"] {
+    width: 40vw;
+  }
+  .catRes{
+    width: 40vw;
+  }
   #gallery.viewGallery {
     right: 20%;
   }
-  .catRes {
-    position: fixed;
-    right: 20px;
-    top: auto;
-  }
+
 }
 
 @media (max-width: 666px) {
