@@ -98,6 +98,7 @@ class Category extends Component {
 
     searchKey( e ) {
         let value = typeof( e ) === "object" ? e.target.value : e 
+        value = value.toLowerCase()
         this.setState({value: value})
         this.props.setSpecCat( value )
     }
